@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Predict Home</title>
+
+        <!-- css file -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-icons.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+
+    </head>
+    <link rel="icon" type="image/png" sizes="16x16" href="https://gopublicschoolswcc.org/wp-content/uploads/2017/01/about-the-data-icon.png"/>
+    <body id="top">
+        <main>
+            <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <a class="navbar-brand" href="#top">
+                        <span>STOCK</span>
+                    </a>
+
+                    <div class="d-lg-none ms-auto me-4">
+                        <a href="#top" class="navbar-icon smoothscroll"></a>
+                    </div>
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-lg-5 me-lg-auto">
+                            <li class="nav-item">
+                                <a class="nav-link click-scroll" href="#section_1">Home</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link click-scroll" href="#section_2">Results</a>
+                            </li>
+                            
+                             <li class="nav-item">
+                                <a class="nav-link click-scroll" href="#section_4">Things to know</a>
+                            </li>
+    
+                            <li class="nav-item">
+                                <a class="nav-link click-scroll" href="#section_5">Details</a>
+                            </li>
+
+                            
+                        </ul>
+
+                        <div class="d-none d-lg-block">
+                            <a href="#top" class="navbar-icon bi-person smoothscroll"></a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            
+
+            <section class="hero-section d-flex justify-content-center align-items-center" id="section_1">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-8 col-12 mx-auto">
+                            <h1 class="text-white text-center">Training model STOCK !</h1>
+
+                            <h6 class="text-center">Training model for the STOCK data set.</h6>
+
+                            <form action="{{ url_for('predict_from') }}" method="post" class="custom-form mt-4 pt-2 mb-lg-0 mb-5" role="search" data-validate="parsley">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <select name="option" class="form-select form-select-sm" id="option">
+                                            <option value="option1">Logistic Reg</option>
+                                            <option value="option2">Naive Bayes</option>
+                                        </select>
+                                    </span> 
+                                    
+                                    <input name="keyword" data-required="true" type="search" class="form-control" id="keyword" placeholder="Input your sentence..." aria-label="Search">
+                                    
+                                    <button type="submit" class="form-control" value="Predict">Predict</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="featured-section">
+                <div class="container">
+                    <div class="row justify-content-center">
+
+                        <div class="col-lg-4 col-12 mb-4 mb-lg-0">
+                            <div class="custom-block bg-white shadow-lg">
+                                    <div class="d-flex">
+                                        <div>
+                                            <h5 class="mb-2">Prediction results</h5>
+                                            {% if pre == [1] %}
+                                                <label class="mb-0">This is <b>POSITIVE</b></label>
+                                            {% elif pre == [-1] %}
+                                                <label class="mb-0">This is <b>NEGATIVE</b></label>
+                                            {% endif %}
+                                        </div>
+
+                                    </div>
+
+                                    <img src="{{ url_for('static', filename='images/predict_icon.png') }}" class="custom-block-image img-fluid" alt=""> 
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-12">
+                            <div class="custom-block custom-block-overlay">
+                                <div class="d-flex flex-column h-100">
+                                    <img src="{{ url_for('static', filename='images/ml_homepage.jpg') }}" class="custom-block-image img-fluid" alt="">
+
+                                    <div class="custom-block-overlay-text d-flex">
+                                        <div>
+                                            <h5 class="text-white mb-2">This is the code for training.</h5>
+
+                                            <p class="text-white">Here is the complete code for training the model. This link goes to Google Colab training.</p>
+
+                                            <a href="https://colab.research.google.com/drive/1ZOnfF-iDagiXe7AIKId0kTbM9qL__uNJ?usp=sharing" class="btn custom-btn mt-2 mt-lg-3">Go to Google Colab</a>
+                                        </div>
+                                    </div>
+
+                                    
+
+                                    <div class="section-overlay"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="explore-section section-padding" id="section_2">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-12 text-center">
+                            <h2 class="mb-4">Results of various models</h1>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="design-tab" data-bs-toggle="tab" data-bs-target="#design-tab-pane" type="button" role="tab" aria-controls="design-tab-pane" aria-selected="true">Logistic Regression</button>
+                            </li>
+                            
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="marketing-tab" data-bs-toggle="tab" data-bs-target="#marketing-tab-pane" type="button" role="tab" aria-controls="marketing-tab-pane" aria-selected="false">Naive Bayes</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <!-- <button class="nav-link" id="finance-tab" data-bs-toggle="tab" data-bs-target="#finance-tab-pane" type="button" role="tab" aria-controls="finance-tab-pane" aria-selected="false">Summary1 (เก็บไว้เลือก)</button> -->
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <!-- <button class="nav-link" id="education-tab" data-bs-toggle="tab" data-bs-target="#education-tab-pane" type="button" role="tab" aria-controls="education-tab-pane" aria-selected="false">Summary2 (เก็บไว้เลือก)</button> -->
+                            </li>
+
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-12">
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="design-tab-pane" role="tabpanel" aria-labelledby="design-tab" tabindex="0">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+                                            <div class="custom-block bg-white shadow-lg">
+                                                    <div class="d-flex">
+                                                        <div>
+                                                            <h5 class="mb-2">Detail</h5>
+                                                            <!-- 222 -->
+                                                            <p class="mb-0">Logistic regression ใช้สำหรับการจำแนกข้อมูลที่เป็น discrete (ไม่ต่อเนื่อง) เพื่อคาดการณ์ความน่าจะเป็นของข้อมูลที่จะอยู่ในกลุ่มที่แตกต่างกัน</p>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <!-- <img src="images/topics/undraw_Remote_design_team_re_urdx.png" class="custom-block-image img-fluid" alt=""> -->
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+                                            <div class="custom-block bg-white shadow-lg">
+                                            
+                                                    <div class="d-flex">
+                                                        <div>
+                                                            <h5 class="mb-2">Accuracy</h5>
+
+                                                                <h1 class="mb-0">78%</h1>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <!-- <img src="images/topics/undraw_Redesign_feedback_re_jvm0.png" class="custom-block-image img-fluid" alt=""> -->
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-6 col-12">
+                                            <div class="custom-block bg-white shadow-lg">
+                                        
+                                                    <div class="d-flex">
+                                                        <div>
+                                                            <h5 class="mb-2">Classification Report</h5>
+
+                                                                <!-- <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p> -->
+                                                        </div>
+
+                                                    </div>
+
+                                                    <img src="https://scontent.fbkk12-3.fna.fbcdn.net/v/t1.15752-9/370129011_1244413836426698_1606927581292092375_n.png?_nc_cat=102&ccb=1-7&_nc_sid=8cd0a2&_nc_eui2=AeGjaCHFgxQ5qO3AKmffvFlJd7qn5xDa5sJ3uqfnENrmwvBJ8eP5k5CR4127LTMzx07sfJNgy9HA9r1n15ulMOFA&_nc_ohc=HDq2RMZ-PC0AX_9EmBe&_nc_ht=scontent.fbkk12-3.fna&oh=03_AdTvFyqb5qPUzHqIWFjTZTaTAnFbDrC6PJXC1P0I0lquuA&oe=65761D5C" class="custom-block-image img-fluid" alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane fade" id="marketing-tab-pane" role="tabpanel" aria-labelledby="marketing-tab" tabindex="0">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-3">
+                                                <div class="custom-block bg-white shadow-lg">
+                                            
+                                                        <div class="d-flex">
+                                                            <div>
+                                                                <h5 class="mb-2">Detail</h5>
+                                                                <!-- 111 -->
+                                                                <p class="mb-0">Naive Bayes ใช้กฎ Bayes' Theorem เพื่อทำนายหรือจำแนกข้อมูล โดยใช้ค่าความน่าจะเป็น (probability) ของเหตุการณ์ต่างๆเพื่อทำนายคลาสของข้อมูลที่กำลังถูกตรวจสอบ</p> 
+                                                            </div>
+
+                                                  
+                                                        </div>
+
+                                                        <!-- <img src="images/topics/undraw_online_ad_re_ol62.png" class="custom-block-image img-fluid" alt=""> -->
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-3">
+                                                <div class="custom-block bg-white shadow-lg">
+                                                 
+                                                        <div class="d-flex">
+                                                            <div>
+                                                                <h5 class="mb-2">Accuracy</h5>
+
+                                                                <h1 class="mb-0">61%</h1>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <!-- <img src="images/topics/undraw_Group_video_re_btu7.png" class="custom-block-image img-fluid" alt=""> -->
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4 col-md-6 col-12">
+                                                <div class="custom-block bg-white shadow-lg">
+                                                  
+                                                        <div class="d-flex">
+                                                            <div>
+                                                                <h5 class="mb-2">Classification Report</h5>
+
+                                                                <!-- <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p> -->
+                                                            </div>
+
+                                                        </div>
+
+                                                        <img src="https://scontent.fbkk9-3.fna.fbcdn.net/v/t1.15752-9/370227046_355285643701918_497580467302623372_n.png?_nc_cat=105&ccb=1-7&_nc_sid=8cd0a2&_nc_eui2=AeG1cRxA1XJgFSBXRwjLpw-sNqIjvzD_Em02oiO_MP8SbbnbRRnNdWb4Kdb2Kmju0soMUcKaCJVKSwUuXWho5bcs&_nc_ohc=W6xi1ConM_YAX-zyt6V&_nc_ht=scontent.fbkk9-3.fna&oh=03_AdSqF5RBDeNndg6qsR60BswU9HKztH1CQRzLqrThWIMAdg&oe=65761052" class="custom-block-image img-fluid" alt="">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                  </div>
+
+                                <div class="tab-pane fade" id="finance-tab-pane" role="tabpanel" aria-labelledby="finance-tab" tabindex="0">   <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-12">
+                                        <div class="custom-block custom-block-overlay">
+                                            <div class="d-flex flex-column h-100">
+                                                <img src="images/ml_homepage.jpg" class="custom-block-image img-fluid" alt="">
+
+                                                <div class="custom-block-overlay-text d-flex">
+                                                    <div>
+                                                        <h5 class="text-white mb-2">Logistic Regression</h5>
+
+
+
+                                                        <a href="topics-detail.html" class="btn custom-btn mt-2 mt-lg-3">Click</a>
+                                                    </div>
+
+                                                </div>
+
+
+
+                                                <div class="section-overlay"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <div class="custom-block custom-block-overlay">
+                                                <div class="d-flex flex-column h-100">
+                                                    <img src="images/ml_homepage.jpg" class="custom-block-image img-fluid" alt="">
+
+                                                    <div class="custom-block-overlay-text d-flex">
+                                                        <div>
+                                                            <h5 class="text-white mb-2">Naive Bayes</h5>
+
+
+
+                                                            <a href="" class="btn custom-btn mt-2 mt-lg-3">Click</a>
+                                                        </div>
+
+                                                    </div>
+
+
+
+                                                    <div class="section-overlay"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+
+                                <div class="tab-pane fade" id="education-tab-pane" role="tabpanel" aria-labelledby="education-tab" tabindex="0">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-12 mb-4 mb-lg-3">
+                                            <div class="custom-block bg-white shadow-lg">
+                                                    <div class="d-flex">
+                                                        <div>
+                                                            <h5 class="mb-2">Logistic Regression</h5>
+
+                                                            <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <img src="images/topics/undraw_Graduation_re_gthn.png" class="custom-block-image img-fluid" alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <div class="custom-block bg-white shadow-lg">
+            
+                                                    <div class="d-flex">
+                                                        <div>
+                                                            <h5 class="mb-2">Naive Bayes</h5>
+
+                                                            <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <img src="images/topics/undraw_Educator_re_ju47.png" class="custom-block-image img-fluid" alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            
+
+
+            <section class="faq-section section-padding" id="section_4">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-6 col-12">
+                            <h2 class="mb-4">Things to know !</h2>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="col-lg-5 col-12">
+                            <img src="{{ url_for('static', filename='images/people_think.png') }}" class="img-fluid" alt="FAQs">
+                        </div>
+
+                        <div class="col-lg-6 col-12 m-auto">
+                            <div class="accordion" id="accordionExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingOne">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            What is Machine Learning?
+                                        </button>
+                                    </h2>
+
+                                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                         <strong>Machine Learning</strong> is when we teach a computer to learn like how kids learn from trying things out. The computer uses data to learn how to do things and make decisions on its own.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            How can Machine Learning change the world?
+                                    </button>
+                                    </h2>
+
+                                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <strong>Machine Learning can change the world</strong> by creating new technology, like self-driving cars, accurate weather forecasts, or helping with medical diagnoses. We can use Machine Learning to solve problems and do things that we couldn't do in the past.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingThree">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            How do we use Machine Learning in our daily life?
+                                    </button>
+                                    </h2>
+
+                                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <strong>We use Machine Learning</strong> in our everyday life, like when we use smartphones to take pictures and the phone can recognize our faces. Or when we use online maps to find directions, the computer uses Machine Learning to do these things.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="contact-section section-padding section-bg" id="section_5">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-12 col-12 text-center">
+                            <h2 class="mb-5">Details</h2>
+                        </div>
+
+                        <div class="col-lg-5 col-12 mb-4 mb-lg-0">
+                            <iframe class="google-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.6566497284884!2d100.91662417612339!3d13.120924387208282!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3102b67ef835f265%3A0x963c6129282e5cb!2z4Lih4Lir4Liy4Lin4Li04LiX4Lii4Liy4Lil4Lix4Lii4LmA4LiB4Lip4LiV4Lij4Lio4Liy4Liq4LiV4Lij4LmMIOC4p-C4tOC4l-C4ouC4suC5gOC4guC4leC4qOC4o-C4teC4o-C4suC4iuC4sg!5e0!3m2!1sth!2sth!4v1699344108408!5m2!1sth!2sth" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 col-12 mb-3 mb-lg- mb-md-0 ms-auto">
+                            <h4 class="mb-3">Kasetsart SriRacha</h4>
+
+                            <p>Kasetsart University, SiRacha Campus
+                                199 Moo 6, Thung Sukhala, SriRacha District, Chonburi Province, 20230, Thailand</p>
+
+                            <hr>
+
+                            <p class="d-flex align-items-center mb-1">
+                                <span class="me-2">Phone</span>
+
+                                <a href="tel:038-354-580" class="site-footer-link">
+                                    038-354-580
+                                </a>
+                            </p>
+
+                            <p class="d-flex align-items-center">
+                                <span class="me-2">Email</span>
+
+                                <a href="mailto:prsrc@ku.th" class="site-footer-link">
+                                    prsrc@ku.th
+                                </a>
+                            </p>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 col-12 mx-auto">
+                            <h4 class="mb-3">Instructor</h4>
+
+                            <img class="teach" src="{{ url_for('static', filename='images/teacher3.png') }}">
+
+                            <hr>
+
+                            <p class="d-flex align-items-center mb-1">
+                                <h7 class="me-2">Chalothon Chootong
+
+                                </h7>
+                                
+                                
+                               
+                            </p>
+
+                            <p class="d-flex align-items-center">
+                                <span class="me-2">Email</span>
+
+                                <a href="mailto:sfsciclc@src.ku.ac.th" class="site-footer-link">
+                                    sfsciclc@src.ku.ac.th
+                                </a>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </main>
+
+<footer class="site-footer section-padding">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-12 mb-4 pb-2">
+                        <a class="navbar-brand mb-2" href="#top">
+                            <span>STOCK</span>
+                        </a>
+                    </div>
+
+                    
+
+                    <div class="col-lg-3 col-md-4 col-6 mb-4 mb-lg-0">
+                        <h6 class="site-footer-title mb-3">Powered by :</h6>
+                        <p class="name-end">6530200347 Panumas Chatthaisong</p>
+                        <p class="name-end">6530200380 Manitchaya Benjajerdsiri</p>
+                        <p class="name-end">6530200886 Auksara Suwannawayak</p>
+                        <p class="name-end">6530200894 Addeen Salaehsakul</p>
+                        
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-12 mt-4 mt-lg-0 ms-auto">
+                        <div class="dropdown">
+                            
+
+
+                            
+                        </div>
+
+                        
+                        
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+
+
+        <!-- js file -->
+        <!-- js file -->
+        <!-- js file -->
+        <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery.sticky.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/click-scroll.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+
+
+    </body>
+</html>
